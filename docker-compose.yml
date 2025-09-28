@@ -10,7 +10,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=db28360.public.databaseasp.net;Database=db28360;User Id=db28360;Password=8g_E#5KeZ+z3;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True
+      - ConnectionStrings__DefaultConnection=Server=mechanic-workshopdb.database.windows.net;Database=mechanicShopDB;User Id=mechanicShop;Password=Khaledmahmoud11?;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://seq:5341/ingest/otlp/v1/traces
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
     depends_on:
