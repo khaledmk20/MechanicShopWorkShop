@@ -10,29 +10,14 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=MechanicShopDb;User=sa;Password=YourStrong@Password1;TrustServerCertificate=True;MultipleActiveResultSets=True
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://seq:5341/ingest/otlp/v1/traces 
+      - ConnectionStrings__DefaultConnection=Server=db28337.public.databaseasp.net;Database=db28337;User Id=db28337;Password=T%x58N@jPc2#;Encrypt=True;TrustServerCertificate=True;MultipleActiveResultSets=True
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://seq:5341/ingest/otlp/v1/traces
       - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
     depends_on:
-      - sqlserver
       - seq
     networks:
       - mechanicshop-net
     restart: on-failure
-    
-  sqlserver:
-    container_name: mechanicshop-sql
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrong@Password1
-    ports:
-      - "1433:1433"
-    volumes:
-      - sqlserver-data:/var/opt/mssql
-    networks:
-      - mechanicshop-net
-    restart: always
 
   seq:
     image: datalust/seq:latest
@@ -61,7 +46,7 @@ services:
     depends_on:
       - mechanicshop-api
     restart: unless-stopped
-      
+
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -72,13 +57,12 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
-      - mechanicshop-net 
+      - mechanicshop-net
     depends_on:
       - prometheus
     restart: unless-stopped
 
 volumes:
-  sqlserver-data: {}
   grafana-data: {}
 
 networks:
